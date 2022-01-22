@@ -1,0 +1,19 @@
+heroku login 
+
+git clone https://github.com/username/reponame.git
+
+cd reponame
+  
+heroku create reponamexyz
+   
+heroku config:set MONGODB_URI=""
+
+git add .
+   
+git commit -m "Fix: URI fix"
+   
+git push heroku master
+   
+git push heroku main
+   
+heroku logs --tail
