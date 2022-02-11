@@ -1,0 +1,16 @@
+# ASSIGN EMAIL ADDRESS TO ADMIN ACCOUNT 
+
+* Login to Keycloak Security Admin Console using admin credentials
+* Click admin name shown in the top right corner
+* Click Manage account
+* Click Personal Info
+* Enter email address
+
+# IN CURRENT REALM 
+* Host:                  smtp.sendgrid.net
+* Port:                  587
+* From:                  abc@xyz.com  
+* Enable StartTLS:       on
+* Enable Authentication: on
+* useranme:              apikey
+* password:              SG.hsbadfvhbsdhbvsvb62378fb_bhbhbdsv.hjsf
