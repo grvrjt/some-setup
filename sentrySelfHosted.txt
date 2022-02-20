@@ -1,0 +1,61 @@
+STEPS TO INSTALL THE SENTRY 
+
+REQUIREMENTS 
+      Docker 19.03.6+
+      Compose 1.28.0+
+      4 CPU Cores
+      8 GB RAM
+      20 GB Free Disk Space
+
+
+INSTALLING DOCKER
+  1. Install Dependencies for docker
+       sudo apt-get install -y \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         gnupg-agent \
+         software-properties-common
+
+   2. Install Docker
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+        sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+        sudo apt-get update -y && sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+ INSTALLING DOCKER-COMPOSE
+   1. Installing docker-compose
+         sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose          |
+                                                                                          |
+                                                                                          |
+                                                                                          ***(Change the version accordingly)
+   2. Make docker-compose executable
+         sudo chmod +x /usr/local/bin/docker-compose
+
+ RUN DOCKER WITHOUT SUDO
+         sudo groupadd docker
+         sudo usermod -aG docker $USER
+
+ INSTALL SENTRY 
+    1. Clone the sentry repository
+           git clone https://github.com/getsentry/onpremise.git
+    
+After cloning the repository, Install Sentry with default configurations using the following command
+     2. Run installation script
+         cd onpremise/
+         ./install.sh --no-user-prompt
+         docker-compose up -d
+
+SET THE USERNAME AND PASSWORD FOR SENTRY DASHBOARD 
+          docker-compose run --rm web createuser
+
+TO UPDATE SENTRY 
+         docker-compose build --pull (Build the services again after updating, and make sure we're        up to date on patch version)  
+         docker-compose run --rm web upgrade (Run new migrations)
+         docker-compose --env-file .env up -d (Recreate the services)
+
+
+
+
