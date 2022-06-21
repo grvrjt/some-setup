@@ -1,0 +1,22 @@
+Step 1 — Logging in as root
+      ssh root@your_server_ip
+
+Step 2 — Creating a New User
+      adduser gaurav
+
+Step 3 — Granting Administrative Privileges
+      usermod -aG sudo gaurav
+
+Step 4 — Setting Up a Firewall
+      ufw app list
+      ufw allow OpenSSH
+      ufw enable 
+      ufw status
+
+Step 5 — Enabling External Access for Your Regular User
+       If the root Account Uses Password Authentication
+              ssh gaurav@your_server_ip   
+              ENTER PASSOWRD OF USER GAURAV                     
+
+
+Source : https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04               
