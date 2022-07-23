@@ -1,0 +1,37 @@
+                    Computer A   (Local)
+                        Computer B  (Remote)
+
+
+ON A :- sudo systemctl start sshd
+     :- sudo systemctl enable sshd  
+ 
+ON B :- ssh -R 43022:localhost:22 dave@A.local
+     
+      1. The -R (reverse) option tells ssh that new SSH sessions must be created on the remote computer.
+      2. The “43022:localhost:22” tells ssh that connection requests to port 43022 on the local computer should be forwarded to port 22 on the remote computer. Port 43022 was chosen because it is listed as being unallocated. It isn’t a special number.
+      3. dave@A.local is the user account the remote computer is going to connect to on the local computer.
+     
+      * Note that when the connection has been made the command prompt changes from dave@B to dave@A.
+
+ ON A:- ssh localhost -p 43022   
+
+     * Note that the command prompt has changed from dave@A to dave@B. We’ve achieved our goal of making an SSH connection to our hard-to-reach remote computer.
+
+ USING SSH WITH KEYS 
+     * To make it more convenient to connect from the remote computer to the local computer, we can set up SSH keys.
+       On the  computer B, type this command:   
+        
+        :-ssh-keygen
+
+     * You will be prompted for a passphrase. You can press Enter to ignore the passphrase questions, but this is not recommended.
+       It would mean that anyone on the remote computer could make an SSH connection to your local computer without being challenged for a password.
+
+    * Your SSH keys will be generated.
+      We need to transfer the public key to the local computer(A). Use this command:
+       
+       :-ssh-copy-id dave@sulaco.local
+    * You will be prompted for the password for the user account you are logging in to, 
+       in this case, dave@A.local.
+
+    * The first time you make a connection request from the remote computer to the local computer, you will have to provide the passphrase. 
+      You will not have to enter it again for future connection requests, for as long as that terminal window remains open.
